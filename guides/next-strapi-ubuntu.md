@@ -34,7 +34,7 @@ rsync --archive --chown=username:username ~/.ssh /home/username
 6. Reload the profile `source ~/.profile`
 
 ## Install & configure NGINX
-*Condensed from [DigitalOcean's docs](https://www.digitalocean.com/community/tutorials/how-to-install-nginx-on-ubuntu-20-04)
+*Condensed from [DigitalOcean's docs](https://www.digitalocean.com/community/tutorials/how-to-install-nginx-on-ubuntu-20-04)*
 
 1. Make sure `apt` is up-to-date `sudo apt update`
 2. Install NGINX `sudo apy install nginx`
