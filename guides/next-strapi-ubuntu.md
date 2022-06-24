@@ -32,3 +32,42 @@ rsync --archive --chown=username:username ~/.ssh /home/username
 4. Create or modify shell profile `sudo nano ~/.profile`
 5. Add global directory to path by pasting this in the file `export PATH=~/.npm-global/bin:$PATH`
 6. Reload the profile `source ~/.profile`
+
+## Install & configure NGINX
+*Condensed from [DigitalOcean's docs](https://www.digitalocean.com/community/tutorials/how-to-install-nginx-on-ubuntu-20-04)
+
+1. Make sure `apt` is up-to-date `sudo apt update`
+2. Install NGINX `sudo apy install nginx`
+3. Enable external, unencrypted traffic `sudo ufw allow 'Nginx HTTP'`
+4. Make a new directory for your server block `sudo mkdir -p /var/www/domain_name/html`
+5. Assign ownership to the directory `sudo chown -R $USER:$USER /var/www/domain_name/html`
+6. Create a configuration file for the block `sudo nano /etc/nginx/sites-available/domain_name`
+7. Add some basic configuration to the file
+```
+server {
+        listen 80;
+        listen [::]:80;
+
+        root /var/www/your_domain/html;
+        index index.html index.htm index.nginx-debian.html;
+
+        server_name your_domain www.your_domain;
+
+        location / {
+                try_files $uri $uri/ =404;
+        }
+}
+```
+8. Enable the configuration `sudo ln -s /etc/nginx/domain_name /etc/nginx/sites-enabled/`
+9. Make sure you'll have enough hash bucket memory by uncommenting the following line in `/etc/nginx/nginx.conf`
+```
+...
+http {
+  ...
+  server_names_hash_bucket_size 64;
+  ...
+}
+...
+```
+10. Check if the configuration is okay `sudo nginx -t`
+11. Restart NGINX `sudo systemctl restart nginx`
