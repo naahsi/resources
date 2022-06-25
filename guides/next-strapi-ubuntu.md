@@ -58,7 +58,7 @@ server {
         }
 }
 ```
-8. Enable the configuration `sudo ln -s /etc/nginx/domain_name /etc/nginx/sites-enabled/`
+8. Enable the configuration `sudo ln -s /etc/nginx/sites-available/domain_name /etc/nginx/sites-enabled/`
 9. Make sure you'll have enough hash bucket memory by uncommenting the following line in `/etc/nginx/nginx.conf`
 ```
 ...
